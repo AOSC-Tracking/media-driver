@@ -26,27 +26,18 @@
 
 #include "cm_mem.h"
 #include "cm_mem_c_impl.h"
-#include "cm_mem_sse2_impl.h"
+//#include "cm_mem_sse2_impl.h"
 
 typedef void(*t_CmFastMemCopy)( void* dst, const   void* src, const size_t bytes );
 typedef void(*t_CmFastMemCopyWC)( void* dst,   const void* src, const size_t bytes );
 
-#define CM_FAST_MEM_COPY_CPU_INIT_C(func)       (func ## _C)
-#define CM_FAST_MEM_COPY_CPU_INIT_SSE2(func)    (func ## _SSE2)
-#define CM_FAST_MEM_COPY_CPU_INIT(func)         (is_SSE2_available ? CM_FAST_MEM_COPY_CPU_INIT_SSE2(func) : CM_FAST_MEM_COPY_CPU_INIT_C(func))
 
 void CmFastMemCopy( void* dst, const void* src, const size_t bytes )
 {
-    static const bool is_SSE2_available = (GetCpuInstructionLevel() >= CPU_INSTRUCTION_LEVEL_SSE2);
-    static const t_CmFastMemCopy CmFastMemCopy_impl = CM_FAST_MEM_COPY_CPU_INIT(CmFastMemCopy);
-
-    CmFastMemCopy_impl(dst, src, bytes);
+    CmFastMemCopy_C(dst, src, bytes);
 }
 
 void CmFastMemCopyWC( void* dst, const void* src, const size_t bytes )
 {
-    static const bool is_SSE2_available = (GetCpuInstructionLevel() >= CPU_INSTRUCTION_LEVEL_SSE2);
-    static const t_CmFastMemCopyWC CmFastMemCopyWC_impl = CM_FAST_MEM_COPY_CPU_INIT(CmFastMemCopyWC);
-
-    CmFastMemCopyWC_impl(dst, src, bytes);
+    CmFastMemCopyWC_C(dst, src, bytes);
 }
