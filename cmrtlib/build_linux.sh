@@ -138,7 +138,6 @@ case $BUILD_SIZE in
         if [[ $BUILD_64 -eq 1 ]]; then
             CROSS_BUILD=1
             BUILD_SIZE=64
-            EXTRA_OPTIONS="export CFLAGS=-m64 CXXFLAGS=-m64"
         fi
         ;;
     64)

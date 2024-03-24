@@ -26,8 +26,10 @@
 #pragma once
 
 #include <iostream>
-#include "cpuid.h"
-#include <smmintrin.h>
+#define SIMDE_X86_SSE2_ENABLE_NATIVE_ALIASES
+#include <simde/x86/sse2.h>
+//#include "cpuid.h"
+//#include <smmintrin.h>
 
 typedef uintptr_t           UINT_PTR;
 #define __fastcall
@@ -120,21 +122,7 @@ Output:
 \*****************************************************************************/
 inline void GetCPUID(int cpuInfo[4], int infoType)
 {
-#ifndef NO_EXCEPTION_HANDLING
-    __try
-    {
-#endif //NO_EXCEPTION_HANDLING
-
-    __get_cpuid(infoType, (unsigned int*)cpuInfo, (unsigned int*)cpuInfo + 1, (unsigned int*)cpuInfo + 2, (unsigned int*)cpuInfo + 3);
-
-#ifndef NO_EXCEPTION_HANDLING
-    }
-    __except( EXCEPTION_EXECUTE_HANDLER )
-    {
-        // cpuid failed!
-        return;
-    }
-#endif  //NO_EXCEPTION_HANDLING
+	return;
 }
 
 void CmFastMemCopyFromWC( void* dst, const void* src, const size_t bytes, CPU_INSTRUCTION_LEVEL cpuInstructionLevel );
