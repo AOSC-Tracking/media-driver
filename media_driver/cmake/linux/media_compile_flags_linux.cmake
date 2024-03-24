@@ -54,7 +54,7 @@ set(MEDIA_COMPILER_FLAGS_COMMON
     # Enable c++14 features
     -std=c++14
     # -m32 or -m64
-    -m${ARCH}
+    #-m${ARCH}
 
     # Global defines
     -DLINUX=1
@@ -63,6 +63,7 @@ set(MEDIA_COMPILER_FLAGS_COMMON
     -DNO_EXCEPTION_HANDLING
     -DINTEL_NOT_PUBLIC
     -g
+    -Wno-overloaded-virtual
 )
 
 if(MEDIA_BUILD_HARDENING)
